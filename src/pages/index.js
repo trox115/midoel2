@@ -14,7 +14,7 @@ const Home = ({ header, image, products, featured, footerData }) => {
   )
 }
 
-export async function getStaticProps() {
+export const getServerSideProps = async (context) => {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const newData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/post?post_id=48`);
   console.log(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
@@ -33,6 +33,5 @@ export async function getStaticProps() {
     }
   };
 }
-
 
 export default Home
