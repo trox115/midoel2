@@ -51,7 +51,7 @@ function Menu({ items }: Props) {
               items?.map(item => {
                 return (
                   <li key={item.ID} tabIndex={0}>
-                    <a href={item.url} className="justify-between">
+                    <a href={`/product-category/${convertToSlug(item.title)}`} className="justify-between">
                       {item.title}
                       {item.children && item.children.length > 0 && <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>}
                     </a>
@@ -60,7 +60,7 @@ function Menu({ items }: Props) {
                         {
                           item.children.map(subItem => {
                             return (
-                              <li key={subItem.ID}><a href={subItem.url}>{subItem.title}</a></li>
+                              <li key={subItem.ID}><a href={`/product-category/${convertToSlug(subItem.title)}`}>{subItem.title}</a></li>
 
                             );
                           })
