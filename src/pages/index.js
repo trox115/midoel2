@@ -7,9 +7,9 @@ const Home = ({ header, image, products, featured, footerData }) => {
 
   return (
     <>
-      <Header logo={header.siteLogoUrl} items={header.headerMenuItems} siteDescription={header.siteDescription} siteLogo={header.siteLogo} siteTitle={header.siteTitle} />
+      {/* <Header logo={header.siteLogoUrl} items={header.headerMenuItems} siteDescription={header.siteDescription} siteLogo={header.siteLogo} siteTitle={header.siteTitle} /> */}
       <HomePage image={ image } newProducts={products} featured={ featured }/>
-      <Footer footerData={footerData} />
+      {/* <Footer footerData={footerData} /> */}
     </>
   )
 }
