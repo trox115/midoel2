@@ -9,7 +9,7 @@ function HomePage({image, newProducts, featured}) {
     <>
     <ImageBackground image={image}/>
     <div className="w-full p-5 bg-white md:flex">
-      <div className="w-full flex flex-column md:w-1/3 md:flex-row md:p-10">
+      <div className="flex w-full flex-column md:w-1/3 md:flex-row md:p-10">
         <div className="w-1/3 text-center">
           <PrintIcon style={{'font-size': '100px'}}/>
         </div>
@@ -20,8 +20,8 @@ function HomePage({image, newProducts, featured}) {
           </p>
         </div>
       </div>
-      <div className="w-full flex flex-column md:w-1/3 my-10 md:my-0 md:p-10">
-        <div className="w-1/3 text-center order-last">
+      <div className="flex w-full my-10 flex-column md:w-1/3 md:my-0 md:p-10">
+        <div className="order-last w-1/3 text-center">
           <CampaignIcon style={{'font-size': '100px'}}/>
         </div>
         <div className="w-2/3 pl-2">
@@ -31,7 +31,7 @@ function HomePage({image, newProducts, featured}) {
         </p>
         </div>
       </div>
-      <div className="w-full flex flex-column md:w-1/3 md:p-10">
+      <div className="flex w-full flex-column md:w-1/3 md:p-10">
         <div className="w-1/3 text-center">
           <FoundationIcon style={{'font-size': '100px'}}/>
         </div>
@@ -44,7 +44,7 @@ function HomePage({image, newProducts, featured}) {
       </div>
     </div>
     <ProductCarousel title='Acabados de chegar' products={ newProducts }/>
-    { featured.length > 0 && <ProductCarousel title='Produtos em destaque' products={ featured }/>}
+    { featured && featured.length > 0 && <ProductCarousel title='Produtos em destaque' products={ featured }/>}
     </>
   )
 }
