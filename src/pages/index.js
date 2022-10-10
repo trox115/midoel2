@@ -17,7 +17,6 @@ const Home = ({ header, image, products, featured, footerData }) => {
 export const getServerSideProps = async (context) => {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const newData = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/post?post_id=48`);
-  console.log(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const { data : footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
   const { data :newProducts } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-new`);
   const { data :featured } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-fetured`);
