@@ -15,8 +15,8 @@ function ProductCategory({ products, header, footerData }) {
     <>
       <Header logo={header.siteLogoUrl} items={header.headerMenuItems} siteDescription={header.siteDescription} siteLogo={header.siteLogo} siteTitle={header.siteTitle} />
       <BreadCrumb categories={[{slug: '/', name: 'Home'}]} name={category.name} />
-      <h1 className='w-full bg-white text-center p-10 text-2xl' >{category.name}</h1>
-      <h3 className='text-center text-xl p-5'>{`${products.length} produtos encontrados para ${ category.name }`}</h3>
+      <h1 className='w-full p-10 text-2xl text-center bg-white' >{category.name}</h1>
+      <h3 className='p-5 text-xl text-center'>{`${products.length} produtos encontrados para ${ category.name }`}</h3>
       <div class="flex flex-wrap mx-2 overflow-hidden bg-white">
         {
           products.map(product => {
@@ -33,7 +33,7 @@ function ProductCategory({ products, header, footerData }) {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export async function getStaticProps(context) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
 
   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product-by-category?slug=${context.params.slug}`);
