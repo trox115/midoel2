@@ -17,9 +17,6 @@ export default async function handler(req, res){
     try{
         const { data } = await api.get(
             'products',
-            {
-                per_page: 50
-            }
         );
         responseData.success = true;
         responseData.products= data;

@@ -33,13 +33,27 @@ function ProductCategory({ products, header, footerData }) {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
 
   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product-by-category?slug=${context.params.slug}`);
   const { data: footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
 
   return { props: { products: products.products, header: data.data.header, footerData: footerData.data } };
+}
+
+export async function getStaticPaths() {
+  const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-products`);
+  const categories = []
+  for(const prod of products.products){
+    for(const category of prod.categories){
+      categories.push(category.slug);
+    }
+  }
+  const newCategories = _.uniq(categories);
+  const paths = newCategories.map((cat) => { return { params: { slug: cat }}})
+
+  return { paths: paths, fallback: false }
 }
 
 export default ProductCategory

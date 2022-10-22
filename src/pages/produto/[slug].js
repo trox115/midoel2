@@ -73,12 +73,17 @@ function Produto({ product, header, footerData }) {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const { data: product } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product?slug=${context.params.slug}`);
   const { data: footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
 
   return { props: { header: data.data.header, product: product.products[0], footerData: footerData.data } };
+}
+
+export async function getStaticPaths(context) {
+  const { data: product } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product?slug=${context.params.slug}`);
+  console.log(product);
 }
 
 export default Produto
