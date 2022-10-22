@@ -73,20 +73,20 @@ function Produto({ product, header, footerData }) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const { data: product } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product?slug=${context.params.slug}`);
   const { data: footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
 
-  return { props: { header: data.data.header, product: product.products[0], footerData: footerData.data }, revalidate: 60 };
+  return { props: { header: data.data.header, product: product.products[0], footerData: footerData.data } };
 }
 
-export async function getStaticPaths() {
-  const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-products`);
+// export async function getStaticPaths() {
+//   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-products`);
 
-  const paths = products.products.map((prod) => { return { params: { slug: prod.slug }}})
+//   const paths = products.products.map((prod) => { return { params: { slug: prod.slug }}})
 
-  return { paths: paths, fallback: 'blocking' }
-}
+//   return { paths: paths, fallback: 'blocking' }
+// }
 
 export default Produto
