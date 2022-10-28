@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['midoel.local', 'reportdroid.com'],
+    domains: ['midoel.local', 'reportdroid.com', 'http://reportdroid.com'],
   },
 }
 

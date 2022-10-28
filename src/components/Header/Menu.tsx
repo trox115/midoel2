@@ -40,13 +40,13 @@ function Menu({ items }: Props) {
     return str;
   }  
   return (
-    <div className="navbar bg-blue-600">
+    <div className="bg-blue-600 navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </label>
-          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabIndex={0} className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
             {
               items?.map(item => {
                 return (
@@ -73,18 +73,18 @@ function Menu({ items }: Props) {
           </ul>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex text-white justify-start">
-        <ul className="menu menu-horizontal p-0">
+      <div className="justify-start hidden text-white navbar-center lg:flex">
+        <ul className="p-0 menu menu-horizontal">
           {
             items?.map(item => {
               return (
                 <li key={item.ID} tabIndex={0}>
-                  <a href={item.url}>
+                  <a href={`/product-category/${convertToSlug(item.title)}`}>
                     {item.title}
                     {item.children && item.children.length > 0 && <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>}
                   </a>
                   {item?.children && item.children.length > 0 &&
-                    <ul className="p-2 bg-white text-black">
+                    <ul className="p-2 text-black bg-white">
                       {
                         item.children.map(subItem => {
                           return (
