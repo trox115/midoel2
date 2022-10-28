@@ -1,16 +1,17 @@
-import { getAllProducts } from "../../lib/redis";
+import { getHeader } from "../../lib/redis";
 
 export default async function handler(req, res){
     const responseData = {
         success: false,
-        products: [],
+        header: {},
+        footer: {},
         number: 0
     }
     try{
-       const data = await getAllProducts();
+       const data = await getHeader();
         responseData.success = true;
-        responseData.products= JSON.parse(data);
-        responseData.length = JSON.parse(data).length
+        responseData.header= JSON.parse(data.data);
+        responseData.footer = JSON.parse(data.footer);
         res.json(responseData);
     }catch(error){
         responseData.error = error.message;

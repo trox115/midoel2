@@ -49,18 +49,4 @@ function HomePage({image, newProducts, featured}) {
   )
 }
 
-export async function getServerSideProps() {
-  console.log(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-new`);
-  // const { data :newProducts } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-new`);
-  // // const { data :featured } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-fetured`);
-  // console.log(newProducts);
-  // return {
-  //   props: {
-  //     newProducts: newProducts.products,
-  //     featured: featured.products,
-  //     revalidate: 1
-  //   }
-  // };
-}
-
 export default HomePage

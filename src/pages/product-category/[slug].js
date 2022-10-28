@@ -13,9 +13,9 @@ function ProductCategory({ products, header, footerData }) {
   
   return (
     <>
-      <Header logo={header.siteLogoUrl} items={header.headerMenuItems} siteDescription={header.siteDescription} siteLogo={header.siteLogo} siteTitle={header.siteTitle} />
-      <BreadCrumb categories={[{slug: '/', name: 'Home'}]} name={category.name} />
-      <h1 className='w-full p-10 text-2xl text-center bg-white' >{category.name}</h1>
+      <Header logo={header.logo} items={header.menu} siteDescription={header.siteDescription} siteLogo={header.logo} siteTitle={header.siteTitle} />
+      <BreadCrumb categories={[{slug: '/', name: 'Home'}]} name={category?.name} />
+      <h1 className='w-full p-10 text-2xl text-center bg-white' >{category?.name}</h1>
       <h3 className='p-5 text-xl text-center'>{`${products.length} produtos encontrados para ${ category.name }`}</h3>
       <div class="flex flex-wrap mx-2 overflow-hidden bg-white">
         {
@@ -34,26 +34,10 @@ function ProductCategory({ products, header, footerData }) {
 }
 
 export async function getServerSideProps(context) {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
-
   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product-by-category?slug=${context.params.slug}`);
-  const { data: footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
+  const { data :header } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-header`);
 
-  return { props: { products: products.products, header: data.data.header, footerData: footerData.data } };
+  return { props: { products: products.products, header: header.header, footerData: header.footer } };
 }
-
-// export async function getStaticPaths() {
-//   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-products`);
-//   const categories = []
-//   for(const prod of products.products){
-//     for(const category of prod.categories){
-//       categories.push(category.slug);
-//     }
-//   }
-//   const newCategories = _.uniq(categories);
-//   const paths = newCategories.map((cat) => { return { params: { slug: cat }}})
-
-//   return { paths: paths, fallback: 'blocking' }
-// }
 
 export default ProductCategory

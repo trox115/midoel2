@@ -7,8 +7,9 @@ function Product({ name, price, images, slug, ref }) {
     e.preventDefault()
     router.push(`/produto/${slug}`)
   }
+  console.log(slug);
   return (
-    <div className="w-72 cursor-pointer" ref={ref} onClick={handleClick}>
+    <div className="cursor-pointer w-72" ref={ref} onClick={handleClick}>
       <div className="w-72">
         <Image
           src={images[0].src}
@@ -17,7 +18,7 @@ function Product({ name, price, images, slug, ref }) {
           height='200px'
         />
       </div>
-      <div className="mt-4 flex justify-between">
+      <div className="flex justify-between mt-4">
         <div>
           <h3 className="text-sm text-gray-700">
             <a href={`/produto/${slug}`}>

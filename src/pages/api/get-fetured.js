@@ -1,31 +1,19 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
-
-var api = new WooCommerceRestApi({
-  url: process.env.NEXT_PUBLIC_URL,
-  consumerKey: process.env.WC_CONSUMER_KEY,
-  consumerSecret: process.env.WC_CONSUMER_SECRET,
-  version: "wc/v3"
-});
+import { getFeatured } from "../../lib/redis";
 
 export default async function handler(req, res){
-    const responseData = {
-        success: false,
-        products: [],
-        number: 0
-    }
-    try{
-        const { data } = await api.get(
-            'products',
-            {
-                featured: true
-            }
-        );
-        responseData.success = true;
-        responseData.products= data;
-        responseData.number = data.length
-        res.json(responseData);
-    }catch(error){
+  const responseData = {
+         success: false,
+         products: [],
+         number: 0
+     }
+  try{
+    const response = await getFeatured();
+    console.log(response);
+    responseData.success = true;
+    responseData.products= JSON.parse(response);
+    responseData.number =JSON.parse(response);
+    res.json(responseData);
+  }catch(error){
         responseData.error = error.message;
         res.status(500).json(responseData)
     }

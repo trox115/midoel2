@@ -1,35 +1,27 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
-
-var api = new WooCommerceRestApi({
-  url: process.env.NEXT_PUBLIC_URL,
-  consumerKey: process.env.WC_CONSUMER_KEY,
-  consumerSecret: process.env.WC_CONSUMER_SECRET,
-  version: "wc/v3"
-});
+import { getAllProducts } from "../../lib/redis";
 
 export default async function handler(req, res){
-    const responseData = {
-        success: false,
-        products: [],
-        number: 0
-    }
-    const { slug } = req?.query ?? {} 
-    try{
-        const idBySlug = await api.get('products/categories', { slug })
-        
-        const { data } = await api.get(
-            'products',
-            {
-                category: idBySlug.data[0].id
-            }
-        );
-        responseData.success = true;
-        responseData.products= data;
-        responseData.number = data.length
-        res.json(responseData);
-    }catch(error){
-        responseData.error = error.message;
-        res.status(500).json(responseData)
-    }
+  const responseData = {
+      success: false,
+      products: [],
+      number: 0
+  }
+  const { slug } = req?.query ?? {} 
+  try{
+    const data = await getAllProducts();
+    const newData = JSON.parse(data);
+    const product = newData.filter((product) => {
+      const categoryIndex = product.categories.findIndex(cat => cat.slug === slug)
+      if(categoryIndex > -1){
+        return product;
+      }
+    });
+    responseData.success = true;
+    responseData.products= product;
+    responseData.length = 1;
+    res.json(responseData);
+  }catch(error){
+      responseData.error = error.message;
+      res.status(500).json(responseData)
+  }
 }

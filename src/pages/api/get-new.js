@@ -1,12 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+import { getNew } from "../../lib/redis";
 
-var api = new WooCommerceRestApi({
-  url: process.env.NEXT_PUBLIC_URL,
-  consumerKey: process.env.WC_CONSUMER_KEY,
-  consumerSecret: process.env.WC_CONSUMER_SECRET,
-  version: "wc/v3"
-});
 
 export default async function handler(req, res){
     const responseData = {
@@ -15,15 +8,10 @@ export default async function handler(req, res){
         number: 0
     }
     try{
-        const { data } = await api.get(
-            'products',
-            {
-                per_page: 8
-            }
-        );
+       const data = await getNew();
         responseData.success = true;
-        responseData.products= data;
-        responseData.number = data.length
+        responseData.products= JSON.parse(data);
+        responseData.number = JSON.parse(data).length
         res.json(responseData);
     }catch(error){
         responseData.error = error.message;

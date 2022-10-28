@@ -9,15 +9,12 @@ import { useState } from 'react';
 
 function Produto({ product, header, footerData }) {
   const [modalOpen, setModalOpen] = useState(false);
-  console.log(modalOpen);
+
   return (
     <>
-      <Header logo={header.siteLogoUrl} items={header.headerMenuItems} siteDescription={header.siteDescription} siteLogo={header.siteLogo} siteTitle={header.siteTitle} />
-
+      <Header logo={header.logo} items={header.menu} siteDescription={header.siteDescription} siteLogo={header.logo} siteTitle={header.siteTitle} />
       <div class="py-6 bg-white">
-
         <BreadCrumb categories={product.categories} name={product.name} />
-
         <div className="px-4 mx-auto mt-6 max-w-7xl sm:px-6 lg:px-8">
           <div className="flex flex-col -mx-4 md:flex-row">
             <div className="px-4 md:flex-1">
@@ -74,19 +71,10 @@ function Produto({ product, header, footerData }) {
 }
 
 export async function getServerSideProps(context) {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
   const { data: product } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-product?slug=${context.params.slug}`);
-  const { data: footerData } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/rae/v1/posts-by-tax?post_type=post&taxonomy=category&slug=footer`);
+  const { data :header } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-header`);
 
-  return { props: { header: data.data.header, product: product.products[0], footerData: footerData.data } };
+  return { props: { header: header.header, product: product.products[0], footerData: header.footer } };
 }
-
-// export async function getStaticPaths() {
-//   const { data: products } = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/get-products`);
-
-//   const paths = products.products.map((prod) => { return { params: { slug: prod.slug }}})
-
-//   return { paths: paths, fallback: 'blocking' }
-// }
 
 export default Produto

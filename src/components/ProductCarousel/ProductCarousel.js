@@ -17,7 +17,7 @@ function ProductCarousel({ title, products }) {
       setOffset(offset + productWidth);
     }
   }, [offset]);
-  console.log(offset);
+
   const handlePrevious = useCallback(() => {
     if (ref.current) {
       const container = ref.current;
@@ -32,18 +32,19 @@ function ProductCarousel({ title, products }) {
   }, [productRef]);
 
   return (
-    <div className='mt-20 px-2'>
-      <h4 className='p-4 flex content-center gap-4 items-center'>
+    <div className='px-2 mt-20'>
+      <h4 className='flex items-center content-center gap-4 p-4'>
         {title}
         <ArrowButton onClick={handleNext} disabled={offset >= width} />
         <ArrowButton isNext={false} onClick={handlePrevious} disabled={offset <= 0} />
       </h4>
-      <div className='flex flex-grow overflow-scroll scroll-smooth gap-4 bg-white no-scrollbar' ref={ref}>
+      <div className='flex flex-grow gap-4 overflow-scroll bg-white scroll-smooth no-scrollbar' ref={ref}>
         {
           products?.map(product => {
+            console.log(product);
             return (
               <div key={product.id} ref={productRef} className='py-10'>
-                <Product key={product.id} images={product.images} name={product.name} />
+                <Product key={product.id} images={product.images} name={product.name} slug={ product.slug }/>
               </div>
             )
           })

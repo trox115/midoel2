@@ -25,8 +25,4 @@ const Header = ({ siteTitle, siteDescription,logo, items }: HeaderProps) => {
   )
 }
 
-// const HeaderContainer = styled.header`
-//   width: 100%;
-// `
-
 export default Header;
