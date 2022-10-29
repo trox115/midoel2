@@ -9,7 +9,19 @@ import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
 
 function ProductCategory({ products, header, footerData }) {
   const router = useRouter();
-  const category = _.find(products[0].categories, {slug: router.query.slug})
+  if(!products[0]){
+    return(
+      <>
+      <Header logo={header.logo} items={header.menu} siteDescription={header.siteDescription} siteLogo={header.logo} siteTitle={header.siteTitle} />
+      <BreadCrumb categories={[{slug: '/', name: 'Home'}]} name={router.query.slug} />
+      <h1 className='w-full p-10 text-2xl text-center bg-white' >{router.query.sluge}</h1>
+      <h3 className='p-5 text-xl text-center'>{`${0} produtos encontrados para ${ router.query.slug }`}</h3>
+      <Footer footerData={footerData} />
+
+      </>
+    )
+  }
+  const category = _.find(products[0]?.categories, {slug: router.query.slug})
   
   return (
     <>

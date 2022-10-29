@@ -4,12 +4,10 @@ interface Props {
   items?:
   {
     ID: number,
-    url: string,
     title: string,
     slug: string,
     children?: {
       ID: number,
-      url: string,
       title: string,
       slug: string,
     }[]

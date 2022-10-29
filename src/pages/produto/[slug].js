@@ -14,7 +14,7 @@ function Produto({ product, header, footerData }) {
     <>
       <Header logo={header.logo} items={header.menu} siteDescription={header.siteDescription} siteLogo={header.logo} siteTitle={header.siteTitle} />
       <div class="py-6 bg-white">
-        <BreadCrumb categories={product.categories} name={product.name} />
+        <BreadCrumb categories={product?.categories ? product.categories : [{slug: '#', name:'sem categoria'}] } name={product.name} />
         <div className="px-4 mx-auto mt-6 max-w-7xl sm:px-6 lg:px-8">
           <div className="flex flex-col -mx-4 md:flex-row">
             <div className="px-4 md:flex-1">
