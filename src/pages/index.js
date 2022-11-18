@@ -4,7 +4,7 @@ import axios from 'axios';
 import Footer from '../components/Footer/Footer';
 
 const Home = ({ header, image, products, featured, footerData }) => {
-  console.log(header);
+
   return (
     <>
       <Header logo={header.logo} items={header.menu} siteDescription={header.siteDescription} siteLogo={header.logo} siteTitle={header.siteTitle} />

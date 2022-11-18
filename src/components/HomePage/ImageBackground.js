@@ -1,9 +1,9 @@
 
 function ImageBackground({ image }) {
-  console.log(image);
+
   return (
-    <div className="w-full">
-      <div className="carousel-item w-full">
+    <div className="w-full animate pop">
+      <div className="w-full carousel-item">
         <img src={image} className="w-full" alt={image?.alt || 'Midoel Imagem'} />
       </div>
     </div>

@@ -41,7 +41,6 @@ function ProductCarousel({ title, products }) {
       <div className='flex flex-grow gap-4 overflow-scroll bg-white scroll-smooth no-scrollbar' ref={ref}>
         {
           products?.map(product => {
-            console.log(product);
             return (
               <div key={product.id} ref={productRef} className='py-10'>
                 <Product key={product.id} images={product.images} name={product.name} slug={ product.slug }/>
