@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 
 interface Props {
   items?:
@@ -10,11 +11,12 @@ interface Props {
       ID: number,
       title: string,
       slug: string,
+      isProduct?: boolean
     }[]
   }[]
 }
 
-function Menu({ items }: Props) {
+function Menu({ items }: Props) {  
   const convertToSlug = (str: string) => {
     str = str.replace(/^\s+|\s+$/g, '');
 
@@ -37,9 +39,10 @@ function Menu({ items }: Props) {
 
     return str;
   }  
+
   return (
-    <div className="bg-blue-600 navbar">
-      <div className="navbar-start">
+    <div className="bg-midoel-blue navbar animate">
+      <div className="navbar-start lg:hidden">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -85,8 +88,9 @@ function Menu({ items }: Props) {
                     <ul className="p-2 text-black bg-white">
                       {
                         item.children.map(subItem => {
+                          const url = subItem.isProduct === undefined ? `/product-category/${convertToSlug(subItem.title)}` : `${subItem.slug}`
                           return (
-                            <li key={subItem.ID}><a href={`/product-category/${convertToSlug(subItem.title)}`}>{subItem.title}</a></li>
+                            <li key={subItem.ID}><a href={ url }>{subItem.title}</a></li>
 
                           );
                         })

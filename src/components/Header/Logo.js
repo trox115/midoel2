@@ -4,15 +4,15 @@ import Link from "next/link";
 function Logo({image}) {
   return (
     <>
-  <div className="bg-white text-center p-2 md:hidden">
+  <div className="p-2 text-center bg-white md:hidden">
     <Link href="/">
-    <Image src={image} className='content-center' alt='midoel-logo' height='50px' width='180px'/>
+    <Image src={image} className='content-center animate glow' alt='midoel-logo' height='50px' width='180px'/>
     </Link>
   </div>
-    <div className="bg-white p-10 hidden md:flex justify-between items-center">
+    <div className="items-center justify-between hidden p-10 bg-white md:flex">
       <div>
     <Link href="/">
-    <Image src={image} className='content-center' alt='midoel-logo' height='50px' width='180px'/>
+    <Image src={image} className='content-center cursor-pointer animate glow' alt='midoel-logo-mobile' height='50px' width='180px'/>
     </Link>
       </div>
     <div>
