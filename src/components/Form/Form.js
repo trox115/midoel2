@@ -4,7 +4,7 @@ function Form() {
   return (
     <form action="#" method="POST">
       <div className="overflow-hidden shadow sm:rounded-md">
-        <div className="bg-white px-4 py-5 sm:p-6">
+        <div className="px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
@@ -15,7 +15,7 @@ function Form() {
                 name="first-name"
                 id="first-name"
                 autoComplete="given-name"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full py-1 mt-1 border-2 border-gray-500 border-solid rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
 
@@ -28,7 +28,7 @@ function Form() {
                 name="last-name"
                 id="last-name"
                 autoComplete="family-name"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full py-1 mt-1 border-2 border-gray-500 border-solid rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
 
@@ -41,7 +41,7 @@ function Form() {
                 name="email"
                 id="email-address"
                 autoComplete="email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full py-1 mt-1 border-2 border-gray-500 border-solid rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
 
@@ -49,15 +49,25 @@ function Form() {
               <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                 País
               </label>
-              <select
-                id="country"
-                name="country"
-                autoComplete="country-name"
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              >
-                <option>Portugal</option>
-                <option>França</option>
-                <option>Outro</option>
+              <select class="form-select form-select-lg mb-3
+      appearance-none
+      block
+      w-full
+      px-4
+      py-2
+      text-xl
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example">
+                <option selected value="1">Portugal</option>
+                <option value="2">França</option>
+                <option value="3">Outro</option>
               </select>
             </div>
 
@@ -69,15 +79,15 @@ function Form() {
                 type="text"
                 name="informacoes"
                 rows="4" cols="50"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full py-1 mt-1 border-2 border-gray-500 border-solid rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+        <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
           <button
             type="submit"
-            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Enviar
           </button>

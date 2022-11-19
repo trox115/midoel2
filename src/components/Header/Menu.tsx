@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import { useRouter } from 'next/router'
 
 interface Props {
   items?:
@@ -17,6 +17,7 @@ interface Props {
 }
 
 function Menu({ items }: Props) {  
+  const history = useRouter();
   const convertToSlug = (str: string) => {
     str = str.replace(/^\s+|\s+$/g, '');
 
@@ -36,9 +37,16 @@ function Menu({ items }: Props) {
     .replace(/\s+/g, '-') 
     // Collapse dashes
     .replace(/-+/g, '-'); 
-
     return str;
   }  
+
+  const handleMobileClick = (e:any) => {
+    e.preventDefault();
+    console.log(e.target.name);
+    if(e.target.name !== 'submenu' && e.target.name !== undefined){
+      history.push(`/product-category/${convertToSlug(e.target.name)}`) 
+    }
+  }
 
   return (
     <div className="bg-midoel-blue navbar animate">
@@ -52,17 +60,22 @@ function Menu({ items }: Props) {
               items?.map(item => {
                 return (
                   <li key={item.ID} tabIndex={0}>
-                    <a href={`/product-category/${convertToSlug(item.title)}`} className="justify-between">
-                      {item.title}
-                      {item.children && item.children.length > 0 && <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>}
-                    </a>
+                    <a className="justify-between">
+                      <output name={ item.title } onClick={ handleMobileClick }>{item.title}</output>
+                      { item.children && item.children.length > 0 &&
+                      <output onClick={ handleMobileClick } name="submenu" className='z-50'>
+                      <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+                      </output>
+                        }
+                      </a>
                     {item?.children && item.children.length > 0 &&
-                      <ul className="p-2">
+                      <ul className="p-2 text-black bg-white">
                         {
                           item.children.map(subItem => {
+                            const url = subItem.isProduct === undefined ? `/product-category/${convertToSlug(subItem.title)}` : `${subItem.slug}`
                             return (
-                              <li key={subItem.ID}><a href={`/product-category/${convertToSlug(subItem.title)}`}>{subItem.title}</a></li>
-
+                              <li key={subItem.ID}><a href={ url }>{subItem.title}</a></li>
                             );
                           })
                         }

@@ -29,7 +29,7 @@ function ProductCategory({ products, header, footerData }) {
       <BreadCrumb categories={[{slug: '/', name: 'Home'}]} name={category?.name} />
       <h1 className='w-full p-10 text-2xl text-center bg-white' >{category?.name}</h1>
       <h3 className='p-5 text-xl text-center'>{`${products.length} produtos encontrados para ${ category.name }`}</h3>
-      <div class="flex flex-wrap mx-2 overflow-hidden bg-white">
+      <div class="flex flex-wrap mx-2 overflow-hidden bg-white pr-1">
         {
           products.map(product => {
             return (
