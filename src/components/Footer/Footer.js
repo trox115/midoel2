@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import cartazes from '../../../public/cartazes.jpg';
+import fichadeprojeto from '../../../public/fichadeprojeto.png';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -28,17 +29,27 @@ function Footer({ footerData }) {
         })
       }
       <div>
+      <span className="footer-title">Apoios</span>
         <a className="link link-hover" onClick={() => setLightBox(!lightBox)}>
           <Image src={cartazes} width='200px' height='300px' alt='Norte 2020' />
         </a>
       </div>
+      <div>
+      <span className="footer-title">Ficha de Projeto</span>
+        <a className="link link-hover" href='/fichaprojeto.pdf'>
+          <Image src={fichadeprojeto} width='200px' height='300px' alt='Norte 2020' />
+        </a>
+      </div>
+
       <Lightbox
         open={lightBox}
         close={() => setLightBox(false)}
         slides={[
           { src: '/cartazes.jpg' },
         ]}
-      />    </footer>
+      />    
+      
+      </footer>
   )
 }
 
